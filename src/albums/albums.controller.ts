@@ -1,6 +1,5 @@
 import { AlbumsService } from "./albums.service";
 import { Body, Controller, Delete, Get, Param, Post, Put} from "@nestjs/common";
-import { Album } from "./albums.entity";
 import { CreateAlbumDto } from "./create-album.dto";
 
 @Controller('albums')

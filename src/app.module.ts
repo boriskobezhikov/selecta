@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
 import { AlbumsModule } from './albums/albums.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DatasourceModule } from './datasource/datasource.module';
 import { Album } from './albums/albums.entity';
+import { User } from './users/users.entity';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
+    UsersModule,
     AlbumsModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -14,7 +16,7 @@ import { Album } from './albums/albums.entity';
       username: 'postgres',
       password: 'post1983',
       database: 'selecta',
-      entities: [Album],
+      entities: [Album, User],
       synchronize: true,
     })
   ],
