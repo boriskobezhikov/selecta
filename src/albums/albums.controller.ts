@@ -7,7 +7,6 @@ export class AlbumsController {
     constructor(private readonly albumsService: AlbumsService) {};
 
     @Get()
-    
     findAll() {
         return this.albumsService.findAll();
     }

@@ -7,6 +7,9 @@ import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class UsersService {
+    static findOne(user: User): User {
+        throw new Error("Method not implemented.");
+    }
     constructor( 
         @InjectRepository(User)
         private usersRepository: Repository<User>

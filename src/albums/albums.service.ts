@@ -21,8 +21,8 @@ export class AlbumsService {
 
     create(createAlbumDto : CreateAlbumDto) {
         const album = new Album();
-        album.Author = createAlbumDto.Author
-        album.Name = createAlbumDto.Name
+        album.Author = createAlbumDto.Author;
+        album.Name = createAlbumDto.Name;
 
         return this.albumsRepository.save(album);
     }
