@@ -4,6 +4,6 @@ import { User } from "src/users/users.entity";
 export class CreateReviewDto {
     rating: number;
     message: string;
-    user: User;
-    album: Album;
+    userId: number;
+    albumId: number;
   }

@@ -19,15 +19,15 @@ export class ReviewsService {
     }
 
     findOne(id: number) {
-        return this.reviewsRepository.findOneBy({id});
+        return this.reviewsRepository.findOneBy({reviewId: id});
     }
 
     create(createReviewDto : CreateReviewDto) {
         const review = new Review();
         review.rating = createReviewDto.rating;
         review.message = createReviewDto.message;
-        review.user = createReviewDto.user;
-        review.album = createReviewDto.album;
+        review.userId = createReviewDto.userId;
+        review.albumId = createReviewDto.albumId;
         return this.reviewsRepository.save(review)
     }
 

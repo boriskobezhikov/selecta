@@ -4,14 +4,14 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 @Entity('albums')
 export class Album {
     @PrimaryGeneratedColumn()
-    id: number;
+    albumId: number;
 
     @Column()
-    Author: string;
+    author: string;
 
     @Column()
-    Name: string;
+    name: string;
 
     @OneToMany(() => Review, (review) => review.album)
-    reviews: Review[]
+    review: Review[]
 }

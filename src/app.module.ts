@@ -20,7 +20,8 @@ import { Review } from './review/reviews.entity';
       password: 'post1983',
       database: 'selecta',
       entities: [Album, User, Review],
-      synchronize: false,
+      synchronize: true,
+      migrations:[]
     })
   ],
   controllers: [],

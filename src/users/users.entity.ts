@@ -4,7 +4,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 @Entity('users')
 export class User {
     @PrimaryGeneratedColumn()
-    id: number;
+    userId: number;
 
     @Column()
     login: string;
@@ -13,5 +13,5 @@ export class User {
     password: string;
 
     @OneToMany(() => Review, (review) => review.user)
-    reviews: Review[]
+    review: Review[]
 }

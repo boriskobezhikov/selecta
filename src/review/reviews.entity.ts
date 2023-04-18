@@ -1,11 +1,11 @@
 import { Album } from "src/albums/albums.entity";
 import { User } from "src/users/users.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('reviews')
 export class Review {
     @PrimaryGeneratedColumn()
-    id: number;
+    reviewId: number;
 
     @Column()
     rating: number;
@@ -13,9 +13,21 @@ export class Review {
     @Column()
     message: string;
 
-    @ManyToOne(() => User, (user) => user.reviews)
-    user: User
+    @ManyToOne(type => User, user => user.review)
+    @JoinColumn({
+        name: 'userId'
+    })
+    user: User;
 
-    @ManyToOne(() => Album, (album) => album.reviews)
-    album: Album
+    @Column({nullable: false})
+    userId: number;
+
+    @ManyToOne(type => Album, album => album.review)
+    @JoinColumn({
+        name: 'albumId'
+    })
+    album: Album;
+
+    @Column({nullable: false})
+    albumId: number;
 }

@@ -10,13 +10,13 @@ export class AlbumsController {
     findAll() {
         return this.albumsService.findAll();
     }
-    @Get() 
-    findOne(@Param('id') id: string) {
-        return this.albumsService.findOne(+id);
+    @Get(':id') 
+    findOne(@Param('id') id: number) {
+        return this.albumsService.findOne(id);
     }
     @Delete(':id')
-    remove(@Param('id') id:string) {
-        return this.albumsService.remove(+id);
+    remove(@Param('id') id:number) {
+        return this.albumsService.remove(id);
     }
     @Post()
     create(@Body() createAlbumDto : CreateAlbumDto) {

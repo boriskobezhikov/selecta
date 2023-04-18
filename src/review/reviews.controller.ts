@@ -11,12 +11,12 @@ export class ReviewsController {
     findAll() {
         return this.reviewsService.findAll();
     }
-    @Get() 
-    findOne(@Param('id') id: string) {
+    @Get(':id') 
+    findOne(@Param('id') id: number) {
         return this.reviewsService.findOne(+id);
     }
     @Delete(':id')
-    remove(@Param('id') id:string) {
+    remove(@Param('id') id:number) {
         return this.reviewsService.remove(+id);
     }
     @Post()
