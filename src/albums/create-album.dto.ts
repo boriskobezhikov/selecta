@@ -1,4 +1,12 @@
+import { ApiProperty } from "@nestjs/swagger";
+
 export class CreateAlbumDto {
-    Name: string;
-    Author: string;
+  @ApiProperty()
+  Name: string;
+
+  @ApiProperty()
+  Author: string;
+
+  @ApiProperty({ type: 'string', format: 'binary' })
+  image: any; 
   }

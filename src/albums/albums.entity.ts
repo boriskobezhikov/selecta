@@ -12,6 +12,9 @@ export class Album {
     @Column()
     name: string;
 
+    @Column({nullable: true})
+    image: string;
+
     @OneToMany(() => Review, (review) => review.album)
     review: Review[]
 }

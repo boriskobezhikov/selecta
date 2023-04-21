@@ -1,6 +1,8 @@
 import { AlbumsService } from "./albums.service";
-import { Body, Controller, Delete, Get, Param, Post, Put} from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInterceptors} from "@nestjs/common";
 import { CreateAlbumDto } from "./create-album.dto";
+import { ApiConsumes } from "@nestjs/swagger";
+import { FileInterceptor } from "@nestjs/platform-express";
 
 @Controller('albums')
 export class AlbumsController {
@@ -19,8 +21,10 @@ export class AlbumsController {
         return this.albumsService.remove(id);
     }
     @Post()
-    create(@Body() createAlbumDto : CreateAlbumDto) {
-        return this.albumsService.create(createAlbumDto);
+    @ApiConsumes('multipart/form-data')
+    @UseInterceptors(FileInterceptor('image'))
+    create(@Body() createAlbumDto : CreateAlbumDto, @UploadedFile() image: Express.Multer.File) {
+        return this.albumsService.create(createAlbumDto, image);
     }
 }
 
