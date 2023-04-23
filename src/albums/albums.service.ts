@@ -30,7 +30,7 @@ export class AlbumsService {
 
         album.author = createAlbumDto.Author;
         album.name = createAlbumDto.Name;
-        album.image = filepath;
+        album.album_image = filepath;
 
         await this.albumsRepository.save(album);
 

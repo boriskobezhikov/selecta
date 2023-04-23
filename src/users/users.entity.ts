@@ -12,6 +12,9 @@ export class User {
     @Column()
     password: string;
 
+    @Column({nullable: true})
+    profile_image: string;
+
     @OneToMany(() => Review, (review) => review.user)
     review: Review[]
 }

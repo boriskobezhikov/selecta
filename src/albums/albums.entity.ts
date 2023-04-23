@@ -13,7 +13,7 @@ export class Album {
     name: string;
 
     @Column({nullable: true})
-    image: string;
+    album_image: string;
 
     @OneToMany(() => Review, (review) => review.album)
     review: Review[]

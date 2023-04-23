@@ -1,6 +1,8 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put} from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UploadedFile, UseInterceptors} from "@nestjs/common";
 import { CreateUserDto } from "./create-user.dto";
 import { UsersService } from "./users.service";
+import { ApiConsumes } from "@nestjs/swagger";
+import { FileInterceptor } from "@nestjs/platform-express";
 
 @Controller('users')
 export class UsersController {
@@ -19,8 +21,10 @@ export class UsersController {
         return this.usersService.remove(id);
     }
     @Post()
-    create(@Body() createUserDto : CreateUserDto) {
-        return this.usersService.create(createUserDto);
+    @ApiConsumes('multipart/form-data')
+    @UseInterceptors(FileInterceptor('image'))
+    create(@Body() createUserDto : CreateUserDto, @UploadedFile() image: Express.Multer.File) {
+        return this.usersService.create(createUserDto, image);
     }
 }
 

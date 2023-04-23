@@ -4,6 +4,8 @@ import { Repository } from "typeorm";
 import { User } from "./users.entity";
 import { CreateUserDto } from "./create-user.dto";
 import * as bcrypt from 'bcrypt'
+import * as path from 'path';
+import * as fs from 'fs';
 
 @Injectable()
 export class UsersService {
@@ -20,13 +22,25 @@ export class UsersService {
         return this.usersRepository.findOneBy({userId: id});
     }
 
-    create(createUserDto : CreateUserDto) {
+    async create(createUserDto : CreateUserDto, image: Express.Multer.File) {
         const saltRounds = 10;
         const user = new User();
+        
         const hash = bcrypt.hashSync(createUserDto.password, saltRounds);
+
+        const filename = `${new Date().getTime()}-${image.originalname}`;
+        const filepath = path.join(__dirname,'..','..','uploads', filename);
+        await fs.promises.writeFile(filepath, image.buffer);
+
+        user.profile_image = filepath;
+
         user.login = createUserDto.login;
         user.password = hash; 
-        return this.usersRepository.save(user)
+        user.profile_image = filepath;
+
+        await this.usersRepository.save(user);
+
+        return user
     }
 
     async remove(id:number) {
