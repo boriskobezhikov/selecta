@@ -1,14 +1,19 @@
-import React, { createContext, useState } from 'react';
+import React, { Dispatch, SetStateAction, createContext, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './routes/Home';
 
-export const ThemeContext = createContext({theme:"light", toggleTheme});
+interface IThemeContext {
+  theme: string;
+  setTheme: Dispatch<SetStateAction<string>>;
+}
+
+export const ThemeContext = createContext<IThemeContext>({theme: '',setTheme: ()=> {}});
 
 function App() {
-  const [theme, toggleTheme] = useState("default value");
+  const [theme, setTheme] = useState("white");
 
   return (
-    <ThemeContext.Provider value={{theme,toggleTheme}}>
+    <ThemeContext.Provider value={{theme, setTheme}}>
     <Routes>
       <Route path="/">
         <Route index element={<Home/>}/>

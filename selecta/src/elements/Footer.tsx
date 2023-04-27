@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Footer.css'
+import { ThemeContext } from '../App';
+
 function Footer(){
+    const theme = useContext(ThemeContext)
     return (
-        <>
-        <footer className="bottom mt-5 text-center fs-5 text-danger">
+        <div className={'container-fluid'}>
+        <footer className="text-center fs-5 text-danger">
         DONE BY @BIGDICCGORILLA2007@GMAIL.COM
         </footer>
-        </>
+        </div>
     )
 }
 

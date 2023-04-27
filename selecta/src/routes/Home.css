@@ -8,22 +8,16 @@
     width: 15rem;
 }
 .button {
-    border-style: solid;
-    border-width: 4px;
-    border-color: black;
+ 
     border-radius: 5px;
     text-decoration: none;
     font-weight: 800;
     transition: 1s;
-    color:rgb(33, 33, 150);
-}
 
-.button:hover{
-    color: rgb(38, 0, 255);
 }
 
 #homepage {
-    background-color: none;
+    transition: 0.5s;
 }
 @keyframes color-change {
     0% { color: rgb(202, 211, 83); }
