@@ -1,11 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext} from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../App';
-import styled from 'styled-components'
-
-const Button = styled.a`
-text-decoration: none;
-`
 
 function Header(){
 
@@ -13,22 +8,22 @@ function Header(){
 
     const toggleTheme = () => {
     
-        if (theme.theme == 'white') {
+        if (theme.theme === 'white') {
             theme.setTheme('black');
         }
         else {
             theme.setTheme('white');
         }
-        document.body.style.backgroundColor = `${(theme.theme == 'white' ? 'black' : 'white')}`;
+        document.body.style.backgroundColor = `${(theme.theme === 'white' ? 'black' : 'white')}`;
     };
 
     return (
-        <nav className={'navbar'}>
+        <nav style={{color: (theme.theme === 'white' ? 'black' : 'white')}} className={'navbar'} > 
             <div className='container d-flex flex-lg-wrap mb-5'>
                 <div className='me-md-auto order-3 order-md-1 p-2'>
-                    <Button href='/' className='fs-2' style={{color: (theme.theme == 'white' ? 'black' : 'white')}}>
+                    <Link to='/' className='fs-2' style={{color: (theme.theme === 'white' ? 'black' : 'white'), textDecoration: 'none'}}>
                         selecta.
-                    </Button>
+                    </Link>
                 </div>
                 <div className='order-2 order-md-1 p-2'>
                     <Link className="nav-link" to={'/albums'}>albums</Link>
@@ -46,9 +41,9 @@ function Header(){
                     <input className="form-control" type="text" placeholder="search..." aria-label="search" />
                 </div>
                 <div className='order-5 p-2' onClick={toggleTheme}>
-                    <Button href='#' style={{color: (theme.theme == 'white' ? 'black' : 'white')}}>
+                    <button style={{color: (theme.theme === 'white' ? 'black' : 'white'), textDecoration: 'none', backgroundColor: theme.theme}}>
                     [switch theme]
-                    </Button>
+                    </button>
                 </div>
             </div>
         </nav>
