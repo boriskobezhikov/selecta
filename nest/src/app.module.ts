@@ -6,12 +6,14 @@ import { User } from './users/users.entity';
 import { UsersModule } from './users/users.module';
 import { ReviewsModule } from './review/reviews.module';
 import { Review } from './review/reviews.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     UsersModule,
     AlbumsModule,
     ReviewsModule,
+    AuthModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',

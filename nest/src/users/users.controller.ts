@@ -16,6 +16,10 @@ export class UsersController {
     findOne(@Param('id') id: number) {
         return this.usersService.findOne(id);
     }
+    @Get(':login') 
+    findByLogin(@Param('login') login: string) {
+        return this.usersService.findByLogin(login);
+    }
     @Delete(':id')
     remove(@Param('id') id: number) {
         return this.usersService.remove(id);

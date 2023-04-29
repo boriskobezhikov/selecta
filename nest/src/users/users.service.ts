@@ -22,21 +22,28 @@ export class UsersService {
         return this.usersRepository.findOneBy({userId: id});
     }
 
+    findByLogin(log: string) {
+        return this.usersRepository.findOneBy({login: log});
+    }
+
     async create(createUserDto : CreateUserDto, image: Express.Multer.File) {
         const saltRounds = 10;
         const user = new User();
         
         const hash = bcrypt.hashSync(createUserDto.password, saltRounds);
 
+        if (image != null) {
         const filename = `${new Date().getTime()}-${image.originalname}`;
         const filepath = path.join(__dirname,'..','..','uploads', filename);
         await fs.promises.writeFile(filepath, image.buffer);
 
         user.profile_image = filepath;
+        }
+        else user.profile_image = null;
 
         user.login = createUserDto.login;
+        user.email = createUserDto.email;
         user.password = hash; 
-        user.profile_image = filepath;
 
         await this.usersRepository.save(user);
 
