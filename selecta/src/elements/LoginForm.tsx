@@ -1,26 +1,30 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../App';
+import LoginLabel from './LoginLabel';
 
-type loginProps = {
-    text: string;
+type registerLoginType = {
+    type: string;
 }
 
-const LoginForm = (props: loginProps) => {
-
-    const handleInputChange = () => {
-
-    }
+const LoginForm = (props: registerLoginType) => {
 
     const theme = useContext(ThemeContext)
 
     return (
         <div className='container-fluid text-center pb-3 fs-3' style={{color: (theme.theme === 'white' ? 'black' : 'white'), fontWeight: '800'}}>
-            {props.text.toUpperCase()}
-            <div className='row justify-content-center'>
-                <div className='col-sm-10 col-lg-3'> 
-                    <input className="form-control" type="text" placeholder={`type your ${props.text}`} aria-label={`${props.text}`} onChange={handleInputChange} />
-                </div>
-            </div>
+            {props.type === 'login' ? (
+                            <>
+                            <LoginLabel text='login' type='login' />
+                            <LoginLabel text='password' type = 'password'/>
+                            </>
+            ) : (
+                <>
+                <LoginLabel text='email' type='email'/>
+                <LoginLabel text='login' type='login'/>
+                <LoginLabel text='password' type='password'/>
+                <LoginLabel text='repeat password' type='password'/>
+                </>
+            )}
         </div>
     )
 }

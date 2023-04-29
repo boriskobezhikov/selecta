@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import Header from "../elements/Header";
 import Footer from "../elements/Footer";
-import LoginForm from "../elements/LoginForm";
 import { ThemeContext } from "../App";
 import { Link } from "react-router-dom";
+import LoginForm from "../elements/LoginForm";
 
 const Login = () => {
     const theme = useContext(ThemeContext);
@@ -11,8 +11,7 @@ const Login = () => {
     return (
         <div className={' text-' + (theme.theme === 'white' ? 'black' : 'white') }>
             <Header/>
-            <LoginForm text='login'/>
-            <LoginForm text='password' />
+            <LoginForm type='login'></LoginForm>
             <div className="text-center pb-3">
                 doesnt have account? <br/>
 
