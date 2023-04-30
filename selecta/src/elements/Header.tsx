@@ -1,27 +1,17 @@
 import React, { useContext} from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../App';
+import useTheme from '../hooks/useTheme';
 
 function Header(){
 
-    const theme = useContext(ThemeContext);
-
-    const toggleTheme = () => {
-    
-        if (theme.theme === 'white') {
-            theme.setTheme('black');
-        }
-        else {
-            theme.setTheme('white');
-        }
-        document.body.style.backgroundColor = `${(theme.theme === 'white' ? 'black' : 'white')}`;
-    };
+    const theme = useTheme();
 
     return (
-        <nav style={{color: (theme.theme === 'white' ? 'black' : 'white')}} className={'navbar'} > 
+        <nav style={{color: theme.oppColor}} className={'navbar'} > 
             <div className='container d-flex flex-lg-wrap mb-5'>
                 <div className='me-md-auto order-3 order-md-1 p-2'>
-                    <Link to='/' className='fs-2' style={{color: (theme.theme === 'white' ? 'black' : 'white'), textDecoration: 'none'}}>
+                    <Link to='/' className='fs-2' style={{color: theme.oppColor, textDecoration: 'none'}}>
                         selecta.
                     </Link>
                 </div>
@@ -40,8 +30,8 @@ function Header(){
                 <div className='order-5 mx-lg-0 p-2'>
                     <input className="form-control" type="text" placeholder="search..." aria-label="search" />
                 </div>
-                <div className='order-5 p-2' onClick={toggleTheme}>
-                    <button style={{color: (theme.theme === 'white' ? 'black' : 'white'), textDecoration: 'none', backgroundColor: theme.theme}}>
+                <div className='order-5 p-2' onClick={theme.onClick}>
+                    <button style={{color: theme.oppColor , textDecoration: 'none', backgroundColor: theme.color}}>
                     [switch theme]
                     </button>
                 </div>

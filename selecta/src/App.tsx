@@ -16,9 +16,12 @@ interface IAuthContext {
 
 export const ThemeContext = createContext<IThemeContext>({theme: '',setTheme: ()=> {}});
 export const AuthContext = createContext<IAuthContext>({auth: false, setAuth: () => {}});
+
 function App() {
+  
   const [theme, setTheme] = useState("white");
   const [auth, setAuth] = useState(false);
+
   return (
     <ThemeContext.Provider value={{theme, setTheme}}>
       <AuthContext.Provider value={{auth,setAuth}}>

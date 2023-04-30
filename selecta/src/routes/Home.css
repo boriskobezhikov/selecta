@@ -4,21 +4,6 @@
     animation: color-change 2s infinite;
 }
 
-#albums {
-    width: 15rem;
-}
-.button {
- 
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 800;
-    transition: 1s;
-
-}
-
-#homepage {
-    transition: 0.5s;
-}
 @keyframes color-change {
     0% { color: rgb(202, 211, 83); }
     20% { color: rgb(101, 221, 101); }
