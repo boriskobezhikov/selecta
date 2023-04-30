@@ -8,19 +8,27 @@ interface IThemeContext {
   setTheme: Dispatch<SetStateAction<string>>;
 }
 
-export const ThemeContext = createContext<IThemeContext>({theme: '',setTheme: ()=> {}});
+interface IAuthContext {
+  auth: boolean;
+  setAuth: Dispatch<SetStateAction<boolean>>;
+}
 
+
+export const ThemeContext = createContext<IThemeContext>({theme: '',setTheme: ()=> {}});
+export const AuthContext = createContext<IAuthContext>({auth: false, setAuth: () => {}});
 function App() {
   const [theme, setTheme] = useState("white");
-
+  const [auth, setAuth] = useState(false);
   return (
     <ThemeContext.Provider value={{theme, setTheme}}>
+      <AuthContext.Provider value={{auth,setAuth}}>
     <Routes>
       <Route path="/">
         <Route index element={<Home/>}/>
         <Route path='/login' element={<Login />}></Route>
       </Route>
     </Routes>
+    </AuthContext.Provider>
     </ThemeContext.Provider>
   );
 }
