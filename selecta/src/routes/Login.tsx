@@ -13,7 +13,7 @@ interface ITypeContext {
 export const TypeContext = createContext<ITypeContext>({type: '', setType: () => {}})
 
 const Login = () => {
-    const [type, setType] = useState("white");
+    const [type, setType] = useState("login");
 
     const theme = useTheme();
 
