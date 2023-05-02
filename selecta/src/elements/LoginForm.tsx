@@ -3,6 +3,7 @@ import useInput from '../hooks/useInput';
 import useLogType from '../hooks/useLogType';
 import useTheme from '../hooks/useTheme';
 import { AuthContext } from '../App';
+import { redirect } from 'react-router-dom';
 
 function LoginForm(){
     const theme = useTheme();
@@ -35,7 +36,10 @@ function LoginForm(){
             }).then((response) => {
                 if (response.status == 201 || response.status == 200) {
                     auth.setAuth(true);
-                    console.log(response.json());
+                    response.json().then((data) => {
+                        auth.setKey(data.access_token);
+                        console.log(auth.key);
+                    })
                 }
             });
         }

@@ -3,6 +3,7 @@ import useInput from '../hooks/useInput';
 import useLogType from '../hooks/useLogType';
 import useTheme from '../hooks/useTheme';
 import { AuthContext } from '../App';
+import { redirect } from 'react-router-dom';
 
 const RegisterForm = () => {
 
@@ -37,7 +38,7 @@ const RegisterForm = () => {
                     email: email.value}),
             }).then((response) => {
                 if (response.status == 201 || response.status == 200) {
-                    auth.setAuth(true);
+                    type.onClick();
                     console.log(response.json());
                 }
             });
