@@ -1,13 +1,11 @@
-import React, { useContext} from 'react';
+import React from 'react';
 import { Link, redirect, useNavigate } from 'react-router-dom';
-import { ThemeContext } from '../App';
 import useTheme from '../hooks/useTheme';
 import useInput from '../hooks/useInput';
 
 function Header(){
     const navigate = useNavigate();
     
-    const theme = useTheme();
     const search = useInput('');
     const handleSearchSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key ==='Enter') {
@@ -18,36 +16,27 @@ function Header(){
             console.log(e.key);
         }
     }
+    
+    const changeTheme = () => {
+        const html = document.documentElement.classList
+        if (html.value != 'dark') {
+            html.add('dark')
+          } else {
+            html.remove('dark')
+          }
+    }
 
     return (
-        <nav style={{color: theme.oppColor}} className={'navbar'} > 
-            <div className='container d-flex flex-lg-wrap mb-5'>
-                <div className='me-md-auto order-3 order-md-1 p-2'>
-                    <Link to='/' className='fs-2' style={{color: theme.oppColor, textDecoration: 'none'}}>
-                        selecta.
-                    </Link>
-                </div>
-                <div className='order-2 order-md-1 p-2'>
-                    <Link className="nav-link" to={'/albums'}>albums</Link>
-                </div>
-                <div className='order-2 order-md-3 p-2'>
-                    <Link className="nav-link" to={'/lists'}>lists</Link>
-                </div>
-                <div className='order-4 p-2'>
-                    <Link className="nav-link" to={'/about'}>about</Link>
-                </div>
-                <div className='order-5 p-2'>
-                    <Link className="nav-link" to={'/login'}>login</Link>
-                </div>
-                <div className='order-5 mx-lg-0 p-2'>
-                    <input className="form-control" type="text" placeholder="search..." aria-label="search" onKeyUp={handleSearchSubmit} onChange={search.onChange} />
-                </div>
-                <div className='order-5 p-2' onClick={theme.onClick}>
-                    <button style={{color: theme.oppColor , textDecoration: 'none', backgroundColor: theme.color}}>
-                    [switch theme]
-                    </button>
-                </div>
-            </div>
+        <nav className='grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12 place-items-center justify-between lg:justify-normal gap-3 text-xl' > 
+            <Link className="col-span-1 lg:col-start-6" to={'/albums'}>albums</Link>
+            <Link className="col-span-1" to={'/lists'}>lists</Link>
+            <Link to='/' className='col-span-4 md:col-span-2 lg:order-first order-first md:order-none sm:order-first text-4xl '>selecta.</Link>
+            <Link className="col-span-1" to={'/about'}>about</Link>
+            <Link className="col-span-1" to={'/login'}>login</Link>
+            <input className="col-span-full md:col-span-2 md:col-start-3 lg:col-start-10  dark:bg-gray-600 rounded border-black dark:border-gray-400 border-2 p-2 lg:w-full " type="search" placeholder="search..."  onKeyUp={handleSearchSubmit} onChange={search.onChange} />
+            <button className='col-span-full  md:col-start-3 md:col-span-1 lg:col-start-12 w-full text-sm' onClick={changeTheme}>
+            [switch theme]
+            </button>
         </nav>
     )
 };
