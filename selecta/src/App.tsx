@@ -3,6 +3,7 @@ import { Navigate, Route, Routes} from 'react-router-dom';
 import Home from './routes/Home';
 import Login from './routes/Login';
 import Search from './routes/Search';
+import Album from './routes/Album';
 
 interface IThemeContext {
   theme: string;
@@ -34,6 +35,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='*' element={<Navigate to='/' replace />} />
         <Route path='/search/:type/:value' element={<Search />}/>
+        <Route path='/album/:id' element= {<Album />}/>
       </Route>
     </Routes>
     </AuthContext.Provider>

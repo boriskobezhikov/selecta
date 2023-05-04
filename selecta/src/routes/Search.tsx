@@ -9,41 +9,51 @@ import SearchFilter from '../elements/SearchFilter';
 const Search = () => {
     const {type,value}  = useParams();
     const [items, setItems] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
 
     const searchUrl = `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search/${type}?q=${value}`
+
     const theme = useTheme();
 
     useEffect(() => {
-        const response = fetch(searchUrl, {
+        setLoading(true);
+        const response = async () => await fetch(searchUrl, {
             method: 'GET'
         })
         .then(res => res.json())
         .then(
             (result) => {
+                const albums = result.data
                 setItems(result.data)
+                setLoading(false);
             }
         );
-        console.log(items);
+        response();
+        
     }, [searchUrl]);
 
 
     return (
-        <div className='transition grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12 md:h-screen  items-start px-2 py-4 lg:px-16 lg:py-6    dark:bg-black  dark:text-white'>
+        <div className={`transition gap-x-2 grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12 items-start px-2 py-4 lg:px-16 lg:py-6  ${(items.length < 8) || (loading) ? 'h-screen' : ''} dark:bg-black  dark:text-white`}>
            <div className='col-span-full  '>
                 <Header />
             </div>
-            <div className='pt-24 col-span-8 col-start-2 gap-6 place-items-center grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8'>
-            {items.map(item => (
-                <AlbumCard cover={item.cover_big} title={item.title} author={item.artist.name} />
-            // <div className='row-span-2 col-span-2 text-center'>
-            //     <p>{item.title}</p>
-            //     <img src={item.cover} />
-            //     </div>
-            ))}
-            </div>
-            <div className='pt-24 col-span-2'>
+
+
+            {!loading ? ( <div className='pt-24 col-span-8 col-start-2 gap-6 place-items-center grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8'>
+                {items.map(item => (
+                    <>
+                    <AlbumCard id={item.id} cover={item.cover_big} title={item.title} artist={item.artist.name} />
+                    </>
+                ))}
+            </div>) : (
+                <div className='col-span-full place-self-center'>loading...</div>
+            )}
+
+            {!loading && <div className='pt-24 col-span-2'>
                 <SearchFilter />
-            </div>
+            </div>}
+
             <div className='col-span-full self-end justify-self-center '>
             <Footer/>
             </div>
