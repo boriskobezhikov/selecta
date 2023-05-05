@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import IAlbum from '../IAlbum';
+import WriteReview from './WriteReview';
 
 
 

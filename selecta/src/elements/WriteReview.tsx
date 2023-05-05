@@ -1,12 +1,20 @@
 import React from "react";
+import Popup from 'reactjs-popup';
+import useInput from "../hooks/useInput";
 
 const WriteReview = () => {
+    const login = useInput('');
+
     return (
-        <div className="grid grid-cols-6 backdrop-blur-sm">
-            <div className="text-lg font-bold col-span-full">REVIEW</div>
-            <input className="col-span-4 col-start-2"></input>
-            <div className="text-blue-500 font-bold">submit</div>
-        </div>
+      <Popup trigger={<button className="text-xl  text-blue-700 font-bold">WRITE REVIEW</button>} modal>
+      <form className="border-2 bg-white backdrop-blur-sm border-black rounded-xl grid justify-items-center self-start " >
+        <p className="col-span-full text-xl font-bold"> review </p>
+        <label className="col-span-full ">
+          <textarea className="border-black border-2 rounded-xl w-full" />
+        </label>
+        <button type="submit" className="col-span-full ">submit</button>
+      </form>
+    </Popup>
     )
 }
 
