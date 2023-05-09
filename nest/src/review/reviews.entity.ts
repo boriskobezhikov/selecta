@@ -1,4 +1,3 @@
-import { Album } from "src/albums/albums.entity";
 import { User } from "src/users/users.entity";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
@@ -20,13 +19,7 @@ export class Review {
     user: User;
 
     @Column({nullable: false})
-    userId: number;
-
-    @ManyToOne(type => Album, album => album.review)
-    @JoinColumn({
-        name: 'albumId'
-    })
-    album: Album;
+    login: string;
 
     @Column({nullable: false})
     albumId: number;

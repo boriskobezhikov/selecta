@@ -7,6 +7,4 @@ export class CreateUserDto {
     password: string;
     @ApiProperty()
     email: string;
-    @ApiPropertyOptional({ type: 'string', format: 'binary' })
-    image: any; 
   }

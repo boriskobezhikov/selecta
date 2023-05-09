@@ -1,12 +1,9 @@
 import { Review } from "src/review/reviews.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('users')
 export class User {
-    @PrimaryGeneratedColumn()
-    userId: number;
-
-    @Column()
+    @PrimaryColumn()
     login: string;
 
     @Column()

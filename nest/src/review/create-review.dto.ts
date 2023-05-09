@@ -1,9 +1,17 @@
-import { Album } from "src/albums/albums.entity";
-import { User } from "src/users/users.entity";
+import { Header } from "@nestjs/common";
+import { ApiOAuth2, ApiProperty } from "@nestjs/swagger";
+import { PrimaryGeneratedColumn } from "typeorm";
 
 export class CreateReviewDto {
-    rating: number;
-    message: string;
-    userId: number;
-    albumId: number;
+
+  @ApiProperty()
+  rating: number;
+
+  @ApiProperty()
+  message: string;
+
+  @ApiProperty()
+  albumId: number;
+  
+  login: string;
   }

@@ -8,27 +8,19 @@ import { FileInterceptor } from "@nestjs/platform-express";
 export class UsersController {
     constructor(private readonly usersService: UsersService) {};
 
-    @Get()
-    findAll() {
-        return this.usersService.findAll();
-    }
-    @Get(':id') 
-    findOne(@Param('id') id: number) {
-        return this.usersService.findOne(id);
-    }
-    @Get('/login/:login') 
+    @Get(':login') 
     findByLogin(@Param('login') login: string) {
-        return this.usersService.findByLogin(login);
+        return this.usersService.findOne(login);
     }
+
     @Delete(':id')
-    remove(@Param('id') id: number) {
-        return this.usersService.remove(id);
+    deleteUser(@Param('login') login: string) {
+        return this.usersService.delete(login);
     }
+
     @Post()
-    @ApiConsumes('multipart/form-data')
-    @UseInterceptors(FileInterceptor('image'))
-    create(@Body() createUserDto : CreateUserDto, @UploadedFile() image: Express.Multer.File) {
-        return this.usersService.create(createUserDto, image);
+    registerUser(@Body() createUserDto : CreateUserDto) {
+        return this.usersService.register(createUserDto);
     }
 }
 

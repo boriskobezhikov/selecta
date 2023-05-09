@@ -4,8 +4,6 @@ import { Repository } from "typeorm";
 import { User } from "./users.entity";
 import { CreateUserDto } from "./create-user.dto";
 import * as bcrypt from 'bcrypt'
-import * as path from 'path';
-import * as fs from 'fs';
 
 @Injectable()
 export class UsersService {
@@ -14,35 +12,19 @@ export class UsersService {
         private usersRepository: Repository<User>
     ) {}
 
-    findAll() {
-        return this.usersRepository.find();
-    }
-
-    findOne(id: number) {
-        return this.usersRepository.findOneBy({userId: id});
-    }
-
-    findByLogin(log: string) {
+    findOne(log: string) {
         return this.usersRepository.findOneBy({login: log});
     }
 
-    async create(createUserDto : CreateUserDto, image: Express.Multer.File) {
-        const saltRounds = 10;
-        const user = new User();
+    async register(createUserDto : CreateUserDto) {
+        const saltRounds: number = 10;
+        const user: User = new User();
         
         const hash = bcrypt.hashSync(createUserDto.password, saltRounds);
 
-        if (image != null) {
-        const filename = `${new Date().getTime()}-${image.originalname}`;
-        const filepath = path.join(__dirname,'..','..','uploads', filename);
-        await fs.promises.writeFile(filepath, image.buffer);
-
-        user.profile_image = filepath;
-        }
-        else user.profile_image = null;
-
         user.login = createUserDto.login;
         user.email = createUserDto.email;
+        user.profile_image = null;
         user.password = hash; 
 
         await this.usersRepository.save(user);
@@ -50,7 +32,7 @@ export class UsersService {
         return user
     }
 
-    async remove(id:number) {
-        await this.usersRepository.delete(id);
+    async delete(login: string) {
+        await this.usersRepository.delete(login);
     }
 }

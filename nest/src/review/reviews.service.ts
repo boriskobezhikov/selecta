@@ -3,9 +3,6 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Review } from "./reviews.entity";
 import { CreateReviewDto} from "./create-review.dto";
-import { User } from "src/users/users.entity";
-import { UsersService } from "src/users/users.service";
-import { AlbumsService } from "src/albums/albums.service";
 
 @Injectable()
 export class ReviewsService {
@@ -26,7 +23,7 @@ export class ReviewsService {
         const review = new Review();
         review.rating = createReviewDto.rating;
         review.message = createReviewDto.message;
-        review.userId = createReviewDto.userId;
+        review.login = createReviewDto.login;
         review.albumId = createReviewDto.albumId;
         return this.reviewsRepository.save(review)
     }
