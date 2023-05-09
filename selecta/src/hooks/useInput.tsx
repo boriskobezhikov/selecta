@@ -4,9 +4,9 @@ const useInput = (text: string) => {
   const [value, setValue] = useState(text);
   const [valid, setValid] = useState(false);
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) {
     setValue(e.target.value);
-    
+    console.log(value);
     switch(e.target.type) {
       case 'text': 
         if (e.target.value.trim() ! == '') setValid(false);
