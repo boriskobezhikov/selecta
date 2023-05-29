@@ -1,0 +1,2 @@
+POST http://localhost:5000/likes/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjksImxvZ2luIjoidXNlciIsImlhdCI6MTY4NTIwMjEzMCwiZXhwIjoxNjg1MjA0NjMwfQ.7v6ugkUa6sGf8h3GugDVIZMTnJxgJ5Ehd529L24D7ns
