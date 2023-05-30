@@ -28,8 +28,8 @@ const RegisterForm = () => {
                 },
                 body: JSON.stringify({
                     login: login.value, 
-                    password: password.value, 
-                    email: email.value}),
+                    email: email.value, 
+                    password: password.value}),
             }).then((response) => {
                 if (response.status == 201 || response.status == 200) {
                     console.log(response.json());

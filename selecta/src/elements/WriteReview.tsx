@@ -11,6 +11,7 @@ const WriteReview = () => {
   
   const submitReview = async () => {
     const url: string = 'http://localhost:5000/reviews';
+    if (id) {
     await fetch( url, {
       method: 'POST',
       mode: 'cors',
@@ -19,18 +20,19 @@ const WriteReview = () => {
         'Authorization': `Bearer ${auth.key}`
       },
       body: JSON.stringify({
-        rating: 5, 
-        message: review.value,
-        albumId: id,})
+        album_id: +id, 
+        text: review.value,
+      })
     }).then((response) => {
         response.json().then((data) => {
             console.log(data);
         })
     })
   }
+  }
 
     return (
-      <Popup trigger={<button className="text-xl  text-blue-700 font-bold">WRITE REVIEW</button>} 
+      <Popup trigger={<button type="submit" className="text-xl  text-blue-700 font-bold">WRITE REVIEW</button>} 
       modal
       >
       <form className="border-4 bg-white backdrop-blur-xl border-black rounded-xl grid justify-items-center px-20 py-4" >
@@ -41,7 +43,7 @@ const WriteReview = () => {
         </label>
         </div>
         <div className="col-span-full py-2">
-        <button type="button" onClick={submitReview} className="text-blue-600 text-lg">submit</button>
+          <button type="button" onClick={submitReview} className="text-blue-600 text-lg">submit</button>
         </div>
       </form>
     </Popup>

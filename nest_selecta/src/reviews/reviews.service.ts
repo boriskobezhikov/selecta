@@ -13,11 +13,15 @@ export class ReviewsService {
     private usersService: UsersService
   ) {}
 
-  getPopular() {
-  return this.reviewsRepo.createQueryBuilder()
-    .select('*')
-    .where('date >= CURRENT_DATE - INTERVAL \'7 DAY\'')
-    .getRawMany();
+  getPopular(album_id: number) {
+  return this.reviewsRepo.createQueryBuilder('review')
+  .leftJoinAndSelect('user', 'user', 'review.userId = user.id')
+  .select('review.*', 'review')
+  .addSelect('user.login', 'login')
+  .orderBy('review.id', 'DESC')
+  .where('album_id = ' + album_id)
+  .limit(3)
+  .getRawMany();
   }
   
 

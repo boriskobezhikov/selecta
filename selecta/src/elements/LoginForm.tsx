@@ -13,7 +13,7 @@ function LoginForm(){
     
 
     const handleSubmit = async () => {
-        const url: string = 'http://localhost:5000/auth/login';
+        const url: string = 'http://localhost:5000/auth/signin';
 
         if(!login.validation || !password.validation) {
             setVaild(false)

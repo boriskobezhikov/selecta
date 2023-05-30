@@ -14,6 +14,7 @@ export class AuthService {
     async signIn(authDto: AuthDto) {
         const user = await this.usersService.findByLogin(authDto.login);
         const isMatch = await bcrypt.compare(authDto.password,user.password);
+        console.log(isMatch)
         if (!user) {
             throw new UnauthorizedException('NO SUCH USER!');
         }

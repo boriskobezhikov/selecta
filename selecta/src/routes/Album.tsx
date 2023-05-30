@@ -4,12 +4,15 @@ import Header from '../elements/Header';
 import Footer from '../elements/Footer';
 import AlbumInfo from '../elements/AlbumInfo';
 import IAlbum from '../IAlbum';
+import IReview from '../IReview';
+import ReviewCard from '../elements/ReviewCard';
 
 const Album = () => {
     const {id}  = useParams();
     const [album,setAlbum] = useState<IAlbum>();
-
+    const [reviews, setReviews] = useState<IReview[]>([]);
     const searchUrl = `https://cors-anywhere.herokuapp.com/https://api.deezer.com/album/${id}`
+    const reviewsUrl = `http://localhost:5000/reviews/popular/${id}`
     useEffect( () => {
         const fetchAlbum = async () => {
             const response = await fetch(searchUrl);
@@ -24,7 +27,16 @@ const Album = () => {
             console.log(response)
         }
         fetchAlbum();
-    }, [searchUrl]);
+        const fetchReviews = async () => {
+          const response = await fetch(reviewsUrl);
+          const data = await response.json();
+          const reviews: IReview[] = data;
+          setReviews(reviews);
+          console.log(data);
+          console.log(response);
+          }
+        fetchReviews();
+    }, [searchUrl, ]);
 
     return (
         <div className={`transition gap-x-2 grid grid-rows-7 h-screen grid-cols-4 md:grid-cols-6 lg:grid-cols-12 items-start px-2 py-4 lg:px-16 lg:py-6  dark:bg-black  dark:text-white`}>
@@ -36,7 +48,13 @@ const Album = () => {
               <AlbumInfo id={album.id} cover={album.cover} title={album.title} artist={album.artist}  />
             </div>
           )}
-          
+          <div className='col-span-7 col-start-7'>
+          {reviews.map(item=> (
+            <>
+            <ReviewCard login={item.login} id={item.id} album_id={item.album_id} text={item.text} date={item.date} userId={item.userId}/>
+            </>
+          ))}
+          </div>
           <div className='col-span-full self-end justify-self-center '>
             <Footer/>
           </div>

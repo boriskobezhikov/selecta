@@ -16,9 +16,9 @@ export class ReviewsController {
     return this.reviewsService.create(createReviewDto,id);
   }
 
-  @Get('popular')
-  getPopular() {
-    return this.reviewsService.getPopular();
+  @Get('popular/:album_id')
+  getPopular(@Param('album_id') album_id:number) {
+    return this.reviewsService.getPopular(album_id);
   }
 
   @Get(':id')
