@@ -49,6 +49,7 @@ const Album = () => {
             </div>
           )}
           <div className='col-span-7 col-start-7'>
+            <div className='text-2xl font-bold mb-10'>LATEST REVIEWS</div>
           {reviews.map(item=> (
             <>
             <ReviewCard login={item.login} id={item.id} album_id={item.album_id} text={item.text} date={item.date} userId={item.userId}/>

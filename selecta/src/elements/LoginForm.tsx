@@ -2,12 +2,12 @@ import React, { useContext, useState } from 'react';
 import useInput from '../hooks/useInput';
 import useTheme from '../hooks/useTheme';
 import { AuthContext } from '../App';
-import { redirect } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 
 function LoginForm(){ 
     const auth = useContext(AuthContext);
-    
     const [valid,setVaild] = useState(true);
+    const navigate = useNavigate();
     const login = useInput('');
     const password = useInput('');
     
@@ -38,6 +38,7 @@ function LoginForm(){
                         auth.setKey(data.access_token);
                         console.log(auth.key);
                     })
+                    navigate(`/`);
                 }
                 else {
                     setVaild(false);

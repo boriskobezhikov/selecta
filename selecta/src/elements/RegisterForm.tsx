@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import useInput from '../hooks/useInput';
+import { useNavigate } from 'react-router-dom';
 
 
 const RegisterForm = () => {
-
-
     const login = useInput('');
     const password = useInput('');
     const email = useInput('');
     const passwordRepeat = useInput('');
-
+    const navigate = useNavigate();
     const [valid,setVaild] = useState(true);
 
     const handleSubmit = async () => {
@@ -35,6 +34,7 @@ const RegisterForm = () => {
                     console.log(response.json());
                 }
             });
+            navigate(`/`);
         }
     }
 

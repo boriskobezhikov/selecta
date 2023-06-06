@@ -33,7 +33,7 @@ const Login = () => {
                 <LoginForm/>
                 <div className="col-span-full text-center pt-5">
                     doesnt have account? <br/>
-                    <a href='#' style={{color:'blue'}}onClick={toggleAuth} >register</a>
+                    <a href='#' style={{color:'blue'}} onClick={toggleAuth} >register</a>
                 </div>
                 </> 
             ) : (
@@ -42,7 +42,7 @@ const Login = () => {
                 <RegisterForm/>
                 <div className="col-span-full text-center px-5">
                     already have account? <br/>
-                    <a href='#' style={{color:'blue'}}onClick={toggleAuth} >login</a>
+                    <a href='#' style={{color:'blue'}} onClick={toggleAuth} >login</a>
                 </div> 
                 </div>
                 </>

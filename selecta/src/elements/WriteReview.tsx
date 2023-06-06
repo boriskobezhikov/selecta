@@ -2,9 +2,10 @@ import React, { useContext, useState } from "react";
 import Popup from 'reactjs-popup';
 import useInput from "../hooks/useInput";
 import { AuthContext } from "../App";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const WriteReview = () => {
+  const navigate = useNavigate()
   const {id}  = useParams();
   const review = useInput('');
   const auth = useContext(AuthContext);
@@ -28,6 +29,7 @@ const WriteReview = () => {
             console.log(data);
         })
     })
+    window.location.reload();
   }
   }
 

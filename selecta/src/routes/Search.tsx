@@ -35,12 +35,12 @@ const Search = () => {
 
     return (
         <div className={`transition gap-x-2 grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12 items-start px-2 py-4 lg:px-16 lg:py-6  ${(items.length < 8) || (loading) ? 'h-screen' : ''} dark:bg-black  dark:text-white`}>
-           <div className='col-span-full  '>
+           <div className='col-span-full order-1  '>
                 <Header />
             </div>
 
 
-            {!loading ? ( <div className='pt-24 col-span-8 col-start-2 gap-6 place-items-center grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8'>
+            {!loading ? ( <div className='col-span-full order-2 py-12 md:pt-24 md:col-span-4 lg:col-span-8 lg:col-start-2 gap-6 place-items-center grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8'>
                 {items.map(item => (
                     <>
                     <AlbumCard id={item.id} cover={item.cover_big} title={item.title} artist={item.artist.name} />
@@ -50,11 +50,11 @@ const Search = () => {
                 <div className='col-span-full place-self-center'>loading...</div>
             )}
 
-            {!loading && <div className='pt-24 col-span-2'>
+            {!loading && <div className='py-12 md:pt-24 order-3 col-span-full md:col-span-2'>
                 <SearchFilter />
             </div>}
 
-            <div className='col-span-full self-end justify-self-center '>
+            <div className='col-span-full self-end order-4 justify-self-center '>
             <Footer/>
             </div>
         </div>
